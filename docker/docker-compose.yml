@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  pg_db:
+    image: postgres
+    restart: always
+    container_name: pg_db
+    environment:
+      - POSTGRES_PASSWORD=postgres_pass
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_DB=postgres_db
+    ports:
+      - '5432:5432'      
+    networks:
+      - lognet
+
+  go:
+    build: 
+      context: ../
+      dockerfile: ./docker/go/Dockerfile
+    restart: always
+    command: tail -f /dev/null
+    ports:
+      - '8080:8080'
+    depends_on:
+      - pg_db
+    volumes:
+      - ../:/app
+    networks:
+      - lognet
+
+networks:
+  lognet:
