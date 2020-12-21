@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/itxor/service/db/migrations"
+
 	"github.com/itxor/service/config"
 	"github.com/itxor/service/db"
 	"github.com/itxor/service/server"
@@ -25,6 +27,10 @@ func run() error {
 
 	pgDB, err := db.Dial(cfg)
 	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err := migrations.Run(pgDB); err != nil {
 		log.Fatal(err)
 	}
 

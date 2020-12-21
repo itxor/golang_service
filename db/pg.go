@@ -3,8 +3,9 @@ package db
 import (
 	"time"
 
-	"github.com/go-pg/pg"
+	"github.com/go-pg/pg/v9"
 	"github.com/itxor/service/config"
+	_ "github.com/lib/pq"
 )
 
 // Timeout is a postgres timeout

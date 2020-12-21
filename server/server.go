@@ -58,7 +58,7 @@ func (s *Server) error(w http.ResponseWriter, r *http.Request, err error, status
 }
 
 // decode decodes incoming JSON request
-func (s *Server) decode(w http.ResponseWriter, r *http.Response, v interface{}) error {
+func (s *Server) decode(w http.ResponseWriter, r *http.Request, v interface{}) error {
 	return json.NewDecoder(r.Body).Decode(v)
 }
 
